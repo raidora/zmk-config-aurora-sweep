@@ -12,6 +12,8 @@
 
 #define LSFT_Z        &mt LSFT Z 
 #define RSFT_MINS     &mt RSFT SLASH 
+#define LCTL_A        &mt LCTL A
+#define RCTL_ODIA     &mt RCTL ODIA
 
 
 &mt {
@@ -46,7 +48,7 @@
 		default_layer {
 			bindings = <
 				&kp Q    &kp W &kp E &kp R   &kp T         &kp Y &kp U &kp I     &kp O   &kp P
-				&kp A    &kp S &kp D &kp F   &kp G         &kp H &kp J &kp K     &kp L   &kp ODIA
+				LCTL_A   &kp S &kp D &kp F   &kp G         &kp H &kp J &kp K     &kp L   RCTL_ODIA
 				LSFT_Z   &kp X &kp C &kp V   &kp B         &kp N &kp M &kp COMMA &kp DOT RSFT_MINS
 								             &kp RET &kp SPC       &lt 1 BSPC  &kp ESC
 				>;
@@ -56,7 +58,15 @@
 				EE_PERC EE_BKTK EE_LBRC EE_LABK EE_SLSH   EE_BSLS EE_RABK EE_RBRC EE_AMPR &trans
 				EE_PIPE EE_DQUO EE_ASTR EE_LPRN EE_LCBR   EE_RCBR EE_RPRN EE_EQLS EE_QUOT EE_DOLR
 				EE_CARN EE_CIRC EE_TLDE EE_EXCL EE_ATSI   EE_HSTG EE_QSTN EE_SCLN EE_COLN EE_USCR
-				                        &trans  &trans    &trans  &trans
+				                        &trans  &mo 2     &trans  &trans
+				>;
+		};
+		keyb_layer {
+			bindings = <
+				&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
+				&trans &trans &trans &trans &trans   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3
+				&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
+				                     &trans &trans   &trans &trans
 				>;
 		};
 	};
