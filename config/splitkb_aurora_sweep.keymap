@@ -39,7 +39,7 @@
 		};
 		combo_tab {
 			timeout-ms = <50>;
-			key-positions = <10 11>;
+			key-positions = <10 11 12>;
 			bindings = <&kp TAB>;
 		};
 		combo_adia {
@@ -57,7 +57,7 @@
 				&kp Q    &kp W &kp E &kp R   &kp T         &kp Y &kp U &kp I     &kp O   &kp P
 				LCTL_A   &kp S &kp D &kp F   &kp G         &kp H &kp J &kp K     &kp L   RCTL_ODIA
 				LSFT_Z   &kp X &kp C &kp V   &kp B         &kp N &kp M &kp COMMA &kp DOT RSFT_MINS
-								             &kp RET &lt 3 SPC     &lt 1 ESC &kp BSPC  
+								             &lt 4 RET &lt 3 SPC     &lt 1 ESC &kp BSPC  
 				>;
 		};
 		sym_layer {
@@ -82,6 +82,14 @@
 				&kp N0 &kp N6 &kp N5 &kp N4 &kp N0   &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
 				&kp N0 &kp N3 &kp N2 &kp N1 &kp N0   &trans &trans &trans &trans &kp UDIA
 				                     &trans &trans   &trans &trans
+				>;
+		};
+		num_layer {
+			bindings = <
+				&kp N0 &kp N9 &kp N8 &kp N7 &kp N0   &kp N0 &kp N7 &kp N8 &kp N9 &kp N0
+				&kp N0 &kp N6 &kp N5 &kp N4 &kp N0   &kp N0 &kp N4 &kp N5 &kp N6 &kp N0
+				&kp N0 &kp N3 &kp N2 &kp N1 &kp N0   &kp N0 &kp N1 &kp N2 &kp N3 &kp N0
+				                     &trans &trans   &trans &kp N0
 				>;
 		};
 	};
