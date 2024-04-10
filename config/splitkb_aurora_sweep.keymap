@@ -17,14 +17,14 @@
 
 
 &mt {
-	flavor = "hold-preferred";
-	tapping-term-ms = <200>;
+	flavor = "tap-unless-interrupted";
+	tapping-term-ms = <100>;
 	quick-tap-ms = <200>;
 	require-prior-idle-ms = <125>;
 };
 
 &lt {
-	flavor = "hold-preferred";
+	flavor = "tap-unless-interrupted";
 	tapping-term-ms = <200>;
 	quick-tap-ms = <200>;
 	require-prior-idle-ms = <125>;
