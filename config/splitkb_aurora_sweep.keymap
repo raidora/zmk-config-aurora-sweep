@@ -17,9 +17,9 @@
 
 
 &mt {
-	flavor = "tap-preferred";
+	flavor = "hold-preferred";
 	tapping-term-ms = <150>;
-	quick-tap-ms = <0>;
+	quick-tap-ms = <100>;
 };
 
 &lt {
@@ -32,18 +32,18 @@
 	behaviors {
 			lh_pht: left_positional_hold_tap {
 					compatible = "zmk,behavior-hold-tap";
-					flavor = "tap-preferred";
-					tapping-term-ms = <150>;
-					quick-tap-ms = <0>;
+					flavor = "tap-unless-interrupted";
+					tapping-term-ms = <200>;
+					quick-tap-ms = <200>;
 					#binding-cells = <2>;
 					bindings = <&kp>, <&kp>;
 					hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29>;
 			};
 			rh_pht: right_positional_hold_tap {
 					compatible = "zmk,behavior-hold-tap";
-					flavor = "tap-preferred";
-					tapping-term-ms = <150>;
-					quick-tap-ms = <0>;
+					flavor = "tap-unless-interrupted";
+					tapping-term-ms = <200>;
+					quick-tap-ms = <200>;
 					#binding-cells = <2>;
 					bindings = <&kp>, <&kp>;
 					hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24>;
@@ -57,6 +57,26 @@
 			key-positions = <18 19>;
 			bindings = <&kp ADIA>;
 		};
+		combo_esc {
+			timeout-ms = <100>;
+			key-positions = <11 12 13>;
+			bindings = <&kp ESC>;
+		};
+		combo_tab {
+			timeout-ms = <100>;
+			key-positions = <1 2 3>;
+			bindings = <&kp TAB>;
+		};
+		combo_backspace {
+			timeout-ms = <100>;
+			key-positions = <6 7 8>;
+			bindings = <&kp BSPC>;
+		};
+		combo_enter {
+			timeout-ms = <100>;
+			key-positions = <16 17 18>;
+			bindings = <&kp RET>;
+		};
 	};
 
 	keymap {
@@ -64,10 +84,10 @@
 
 		default_layer {
 			bindings = <
-				&kp Q          &kp W          &kp E          &kp R          &kp T         &kp Y &kp U          &kp I          &kp O          &kp P
-				&lh_pht LSFT A &lh_pht LGUI S &lh_pht LALT D &lh_pht LCTL F &kp G         &kp H &rh_pht LCTL J &rh_pht RALT K &rh_pht RGUI L &rh_pht RSFT ODIA
-				LSFT_Z         &kp X          &kp C          &kp V          &kp B         &kp N &kp M          &kp COMMA      &kp DOT        RSFT_MINS
-								                                     &lt 4 RET      &lt 3 SPC     &lt 1 ESC &kp BSPC  
+				&kp Q          &kp W          &kp E          &kp R          &kp T         &kp Y        &kp U          &kp I          &kp O          &kp P
+				&kp A          &kp S          &kp D          &kp F          &kp G         &kp H        &kp J          &kp K          &kp L          &kp ODIA
+				LSFT_Z         &kp X          &kp C          &kp V          &kp B         &kp N        &kp M          &kp COMMA      &kp DOT        RSFT_MINS
+								                                     &mt LCTL RET   &lt 2 SPC     &lt 1 ESC    &mt LSFT BSPC  
 				>;
 		};
 		sym_layer {
@@ -75,7 +95,15 @@
 				EE_PERC EE_BKTK EE_LBRC EE_LABK EE_SLSH   EE_BSLS EE_RABK EE_RBRC EE_AMPR &trans
 				EE_PIPE EE_DQUO EE_ASTR EE_LPRN EE_LCBR   EE_RCBR EE_RPRN EE_EQLS EE_QUOT EE_DOLR
 				EE_CARN EE_CIRC EE_TLDE EE_EXCL EE_ATSI   EE_HSTG EE_QSTN EE_SCLN EE_COLN EE_USCR
-				                        &trans  &mo 2     &trans  &trans
+				                        &mo 3   &trans    &trans  &trans
+				>;
+		};
+		numnav_layer {
+			bindings = <
+				&kp TAB  &kp N9 &kp N8 &kp N7 &kp N0   &trans   &trans   &trans &trans    &kp BSPC
+				&kp LCTL &kp N6 &kp N5 &kp N4 &kp N0   &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
+				&kp LSFT &kp N3 &kp N2 &kp N1 &kp N0   &trans   &trans   &trans &trans    &kp UDIA
+				                      &trans &trans   &trans   &trans
 				>;
 		};
 		keyb_layer {
@@ -84,22 +112,6 @@
 				&trans &trans &trans &trans &trans   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3
 				&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 				                     &trans &trans   &trans &trans
-				>;
-		};
-		numnav_layer {
-			bindings = <
-				&kp ESC &trans &trans &trans &trans   &trans   &trans   &trans &trans    &kp BSPC
-				&kp TAB &trans &trans &trans &trans   &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
-				&trans  &trans &trans &trans &trans   &trans   &trans   &trans &trans    &kp UDIA
-				                      &trans &trans   &trans   &trans
-				>;
-		};
-		num_layer {
-			bindings = <
-				&kp N0 &kp N9 &kp N8 &kp N7 &kp N0   &kp N0 &kp N7 &kp N8 &kp N9 &kp N0
-				&kp N0 &kp N6 &kp N5 &kp N4 &kp N0   &kp N0 &kp N4 &kp N5 &kp N6 &kp N0
-				&kp N0 &kp N3 &kp N2 &kp N1 &kp N0   &kp N0 &kp N1 &kp N2 &kp N3 &kp N0
-				                     &trans &trans   &trans &kp N0
 				>;
 		};
 	};
