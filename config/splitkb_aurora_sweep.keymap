@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 
 #include "est_definitions.h"
@@ -29,6 +29,26 @@
 };
 
 / {
+	behaviors {
+			lh_pht: left_positional_hold_tap {
+					compatible = "zmk,behavior-hold-tap";
+					flavor = "tap-preferred";
+					tapping-term-ms = <150>;
+					quick-tap-ms = <0>;
+					#binding-cells = <2>;
+					bindings = <&kp>, <&kp>;
+					hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29>;
+			};
+			rh_pht: right_positional_hold_tap {
+					compatible = "zmk,behavior-hold-tap";
+					flavor = "tap-preferred";
+					tapping-term-ms = <150>;
+					quick-tap-ms = <0>;
+					#binding-cells = <2>;
+					bindings = <&kp>, <&kp>;
+					hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24>;
+			};
+	};
 
 	combos { 
 		compatible = "zmk,combos";
@@ -44,10 +64,10 @@
 
 		default_layer {
 			bindings = <
-				&kp Q    &kp W &kp E &kp R   &kp T         &kp Y &kp U &kp I     &kp O   &kp P
-				LCTL_A   &kp S &kp D &kp F   &kp G         &kp H &kp J &kp K     &kp L   RCTL_ODIA
-				LSFT_Z   &kp X &kp C &kp V   &kp B         &kp N &kp M &kp COMMA &kp DOT RSFT_MINS
-								             &lt 4 RET &lt 3 SPC     &lt 1 ESC &kp BSPC  
+				&kp Q          &kp W          &kp E          &kp R          &kp T         &kp Y &kp U          &kp I          &kp O          &kp P
+				&lh_pht LSFT A &lh_pht LGUI S &lh_pht LALT D &lh_pht LCTL F &kp G         &kp H &rh_pht LCTL J &rh_pht RALT K &rh_pht RGUI L &rh_pht RSFT ODIA
+				LSFT_Z         &kp X          &kp C          &kp V          &kp B         &kp N &kp M          &kp COMMA      &kp DOT        RSFT_MINS
+								                                     &lt 4 RET      &lt 3 SPC     &lt 1 ESC &kp BSPC  
 				>;
 		};
 		sym_layer {
