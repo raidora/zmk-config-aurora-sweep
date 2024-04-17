@@ -15,17 +15,28 @@
 #define LCTL_A        &mt LCTL A
 #define RCTL_ODIA     &mt RCTL ODIA
 
+#define DEFA 0
+#define SYMB 1 
+#define NAVG 2
+#define NUMS 3
+#define KEYB 4
 
 &mt {
 	flavor = "hold-preferred";
 	tapping-term-ms = <150>;
-	quick-tap-ms = <100>;
+	quick-tap-ms = <200>;
 };
 
 &lt {
 	flavor = "hold-preferred";
 	tapping-term-ms = <150>;
-	quick-tap-ms = <0>;
+	quick-tap-ms = <200>;
+};
+
+&sk {
+	release-after-ms = <2000>;
+	lazy;
+	ignore-modifiers;
 };
 
 / {
@@ -84,10 +95,10 @@
 
 		default_layer {
 			bindings = <
-				&kp Q          &kp W          &kp E          &kp R          &kp T         &kp Y        &kp U          &kp I          &kp O          &kp P
-				&kp A          &kp S          &kp D          &kp F          &kp G         &kp H        &kp J          &kp K          &kp L          &kp ODIA
-				LSFT_Z         &kp X          &kp C          &kp V          &kp B         &kp N        &kp M          &kp COMMA      &kp DOT        RSFT_MINS
-								                                     &mt LCTL RET   &lt 2 SPC     &lt 1 ESC    &mt LSFT BSPC  
+				&kp Q  &kp W &kp E &kp R        &kp T           &kp Y        &kp U &kp I     &kp O   &kp P
+				&kp A  &kp S &kp D &kp F        &kp G           &kp H        &kp J &kp K     &kp L   &kp ODIA
+				LSFT_Z &kp X &kp C &kp V        &kp B           &kp N        &kp M &kp COMMA &kp DOT RSFT_MINS
+								           &mt LCTL RET &lt NAVG SPC    &lt SYMB ESC &mt LSFT BSPC  
 				>;
 		};
 		sym_layer {
@@ -95,15 +106,23 @@
 				EE_PERC EE_BKTK EE_LBRC EE_LABK EE_SLSH   EE_BSLS EE_RABK EE_RBRC EE_AMPR &trans
 				EE_PIPE EE_DQUO EE_ASTR EE_LPRN EE_LCBR   EE_RCBR EE_RPRN EE_EQLS EE_QUOT EE_DOLR
 				EE_CARN EE_CIRC EE_TLDE EE_EXCL EE_ATSI   EE_HSTG EE_QSTN EE_SCLN EE_COLN EE_USCR
-				                        &mo 3   &trans    &trans  &trans
+				                        &trans  &trans    &trans  &trans
 				>;
 		};
-		numnav_layer {
+		nav_layer {
 			bindings = <
-				&kp TAB  &kp N9 &kp N8 &kp N7 &kp N0   &trans   &trans   &trans &trans    &kp BSPC
-				&kp LCTL &kp N6 &kp N5 &kp N4 &kp N0   &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
-				&kp LSFT &kp N3 &kp N2 &kp N1 &kp N0   &trans   &trans   &trans &trans    &kp UDIA
-				                      &trans &trans   &trans   &trans
+				&kp ESC  &trans   &trans   &trans    &trans   &trans   &trans   &trans &trans    &kp BSPC
+				&kp TAB  &trans   &trans   &mo NUMS  &trans   &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
+				&sk LSFT &sk LGUI &sk LALT &sk LCTL  &trans   &trans   &trans   &trans &trans    &kp UDIA
+				                  &trans   &trans    &trans   &trans
+				>;
+		};
+		num_layer {
+			bindings = <
+				&trans &trans &trans           &trans &trans   &trans &kp N7 &kp N8 &kp N9 &trans
+				&trans &trans &kp LS(LC(LGUI)) &trans &trans   &trans &kp N4 &kp N5 &kp N6 &trans
+				&trans &trans &trans           &trans &trans   &trans &kp N1 &kp N2 &kp N3 &trans
+				                               &trans &trans   &trans &kp N0
 				>;
 		};
 		keyb_layer {
