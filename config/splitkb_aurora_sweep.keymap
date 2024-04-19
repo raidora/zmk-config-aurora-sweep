@@ -114,7 +114,7 @@
 				&kp ESC  &trans   &trans   &trans    &trans   &trans   &trans   &trans &trans    &kp BSPC
 				&kp TAB  &trans   &trans   &mo NUMS  &trans   &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
 				&sk LSFT &sk LGUI &sk LALT &sk LCTL  &trans   &trans   &trans   &trans &trans    &kp UDIA
-				                  &trans   &trans    &trans   &trans
+				                  &trans   &trans    &mo KEYB &trans
 				>;
 		};
 		num_layer {
