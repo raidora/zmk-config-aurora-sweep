@@ -10,6 +10,9 @@
 
 #include "est_definitions.h"
 
+#define XXXXX &none
+#define _____ &trans
+
 #define LSFT_Z        &mt LSFT Z 
 #define RSFT_MINS     &mt RSFT SLASH 
 #define LCTL_A        &mt LCTL A
@@ -40,27 +43,6 @@
 };
 
 / {
-	behaviors {
-			lh_pht: left_positional_hold_tap {
-					compatible = "zmk,behavior-hold-tap";
-					flavor = "tap-unless-interrupted";
-					tapping-term-ms = <200>;
-					quick-tap-ms = <200>;
-					#binding-cells = <2>;
-					bindings = <&kp>, <&kp>;
-					hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29>;
-			};
-			rh_pht: right_positional_hold_tap {
-					compatible = "zmk,behavior-hold-tap";
-					flavor = "tap-unless-interrupted";
-					tapping-term-ms = <200>;
-					quick-tap-ms = <200>;
-					#binding-cells = <2>;
-					bindings = <&kp>, <&kp>;
-					hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24>;
-			};
-	};
-
 	combos { 
 		compatible = "zmk,combos";
 		combo_adia {
@@ -68,69 +50,113 @@
 			key-positions = <18 19>;
 			bindings = <&kp ADIA>;
 		};
-		combo_esc {
-			timeout-ms = <100>;
-			key-positions = <11 12 13>;
-			bindings = <&kp ESC>;
-		};
-		combo_tab {
-			timeout-ms = <100>;
+		combo_left_top {
+			timeout-ms = <200>;
 			key-positions = <1 2 3>;
+			bindings = <&kp RET>;
+		};
+		combo_left_middle {
+			timeout-ms = <200>;
+			key-positions = <11 12 13>;
+			bindings = <&mo NUMS>;
+		};
+		combo_left_thumb {
+			timeout-ms = <200>;
+			key-positions = <30 31>;
+			bindings = <&kp LCTL>;
+		};
+		combo_right_top {
+			timeout-ms = <200>;
+			key-positions = <6 7 8>;
 			bindings = <&kp TAB>;
 		};
-		combo_backspace {
-			timeout-ms = <100>;
-			key-positions = <6 7 8>;
-			bindings = <&kp BSPC>;
-		};
-		combo_enter {
-			timeout-ms = <100>;
+		combo_right_middle {
+			timeout-ms = <200>;
 			key-positions = <16 17 18>;
 			bindings = <&kp RET>;
+		};
+		combo_right_thumb {
+			timeout-ms = <200>;
+			key-positions = <32 33>;
+			bindings = <&mo LGUI>;
 		};
 	};
 
 	keymap {
 		compatible = "zmk,keymap";
-
+		//  -------------------------------------------------------------
+		// |  Q  |  W  |  E  |  R  |  T  | |  Y  |  U  |  I  |  O  |  P  |
+		// |  A  |  S  |  D  |  F  |  G  | |  H  |  I  |  K  |  L  Ä  Ö  |
+		// |  Z  |  X  |  C  |  V  |  B  | |  N  |  M  |  ,  |  .  |  -  |
+		//  -----------------| ESC | SPC | | ESC | BSPC|-----------------
+		//                   | NAV |     | | SYM |     |
+		//                   |   LCTL    | |    META   |
 		default_layer {
 			bindings = <
-				&kp Q  &kp W &kp E &kp R        &kp T           &kp Y        &kp U &kp I     &kp O   &kp P
-				&kp A  &kp S &kp D &kp F        &kp G           &kp H        &kp J &kp K     &kp L   &kp ODIA
-				LSFT_Z &kp X &kp C &kp V        &kp B           &kp N        &kp M &kp COMMA &kp DOT RSFT_MINS
-								           &mt LCTL RET &lt NAVG SPC    &lt SYMB ESC &mt LSFT BSPC  
+				&kp Q &kp W &kp E &kp R &kp T &kp Y &kp U &kp I &kp O &kp P
+				&kp A  &kp S &kp D &kp F &kp G &kp H &kp J &kp K &kp L &kp ODIA
+				LSFT_Z &kp X &kp C &kp V &kp B &kp N &kp M &kp COMMA &kp DOT RSFT_MINS
+				&mt NAVG ESC &kp SPC &lt SYMB ESC &kp BSPC  
 				>;
 		};
+		//  -------------------------------------------------------------
+		// |  %  |  `  |  [  |  <  |  /  | |  \  |  >  |  ]  |  &  |     |
+		// |  |  |  "  |  *  |  (  |  {  | |  }  |  )  |  =  |  '  |  $  |
+		// |  ˇ  |  ^  |  ~  |  !  |  @  | |  #  |  ?  |  ;  |  :  |  _  |
+		//  -----------------|     |     | |     |     |-----------------
+		//                   |     |     | |     |     |
+		//                   |           | |           |
 		sym_layer {
 			bindings = <
-				EE_PERC EE_BKTK EE_LBRC EE_LABK EE_SLSH   EE_BSLS EE_RABK EE_RBRC EE_AMPR &trans
+				EE_PERC EE_BKTK EE_LBRC EE_LABK EE_SLSH   EE_BSLS EE_RABK EE_RBRC EE_AMPR XXXXX
 				EE_PIPE EE_DQUO EE_ASTR EE_LPRN EE_LCBR   EE_RCBR EE_RPRN EE_EQLS EE_QUOT EE_DOLR
 				EE_CARN EE_CIRC EE_TLDE EE_EXCL EE_ATSI   EE_HSTG EE_QSTN EE_SCLN EE_COLN EE_USCR
-				                        &trans  &trans    &trans  &trans
+				XXXXX XXXXX XXXXX XXXXX
 				>;
 		};
+		//  -------------------------------------------------------------
+		// | TAB |     |     |     |     | |     |     |     |     | BSPC|
+		// | LSFT| LGUI| LALT| LCTL|     | | LEFT| DOWN|  UP |RIGHT|  Õ  |
+		// |     |     |     |     |     | |     |     |     |     |  Ü  |
+		//  -----------------|     |     | |     |     |-----------------
+		//                   |     |     | |     |     |
+		//                   |           | |           |
 		nav_layer {
 			bindings = <
-				&kp ESC  &trans   &trans   &trans    &trans   &trans   &trans   &trans &trans    &kp BSPC
-				&kp TAB  &trans   &trans   &mo NUMS  &trans   &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
-				&sk LSFT &sk LGUI &sk LALT &sk LCTL  &trans   &trans   &trans   &trans &trans    &kp UDIA
-				                  &trans   &trans    &mo KEYB &trans
+				&kp TAB XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp BSPC
+				&sk LSFT &sk LGUI &sk LALT &sk LCTL XXXXX &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
+				XXXXX XXXXXX XXXXXX XXXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp UDIA
+				XXXXX XXXXX &mo KEYB XXXXX 
 				>;
 		};
+		//  -------------------------------------------------------------
+		// |     |     |     |     |     | |     |  N7 |  N8 |  N9 |    |
+		// |     |     |SCGUI|     |     | |     |  N4 |  N5 |  N6 |    |
+		// |     |     |     |     |     | |     |  N1 |  N2 |  N3 |    |
+		//  -----------------|     |     | |     |     |-----------------
+		//                   |     |     | |     |     |
+		//                   |           | |           |
 		num_layer {
 			bindings = <
-				&trans &trans &trans           &trans &trans   &trans &kp N7 &kp N8 &kp N9 &trans
-				&trans &trans &kp LS(LC(LGUI)) &trans &trans   &trans &kp N4 &kp N5 &kp N6 &trans
-				&trans &trans &trans           &trans &trans   &trans &kp N1 &kp N2 &kp N3 &trans
-				                               &trans &trans   &trans &kp N0
+				XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp N7 &kp N8 &kp N9 XXXXX
+				XXXXX XXXXX &kp LS(LC(LGUI)) XXXXX XXXXX XXXXX &kp N4 &kp N5 &kp N6 XXXXX
+				XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp N1 &kp N2 &kp N3 XXXXX
+				XXXXX XXXXX XXXXX XXXXX
 				>;
 		};
+		//  -------------------------------------------------------------
+		// |     |     |     |     |     | |     |     |     |     |     |
+		// |     |     |     |     |     | |BTCLR| BT0 | BT1 | BT2 | BT3 |
+		// |     |     |     |     |     | |     |     |     |     |     |
+		//  -----------------|     |     | |     |     |-----------------
+		//                   |     |     | |     |     |
+		//                   |           | |           |
 		keyb_layer {
 			bindings = <
-				&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-				&trans &trans &trans &trans &trans   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3
-				&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-				                     &trans &trans   &trans &trans
+				XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX
+				XXXXX XXXXX XXXXX XXXXX XXXXX &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3
+				XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX
+				XXXXX XXXXX XXXXX XXXXX
 				>;
 		};
 	};
