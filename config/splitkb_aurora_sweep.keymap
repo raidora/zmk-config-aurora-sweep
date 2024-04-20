@@ -52,7 +52,7 @@
 		combo_left_top {
 			timeout-ms = <200>;
 			key-positions = <1 2 3>;
-			bindings = <&kp RET>;
+			bindings = <&kp TAB>;
 		};
 		combo_left_middle {
 			timeout-ms = <200>;
@@ -62,7 +62,7 @@
 		combo_left_thumb {
 			timeout-ms = <200>;
 			key-positions = <30 31>;
-			bindings = <&lt NUMS ESC>;
+			bindings = <&mo LCTL ESC>;
 		};
 		combo_right_top {
 			timeout-ms = <200>;
@@ -79,9 +79,9 @@
 			key-positions = <32 33>;
 			bindings = <&kp LGUI>;
 		};
-combo_outer_bottom_pinkies {
+combo_outer_middle_pinkies {
 			timeout-ms = <200>;
-			key-positions = <20 29>;
+			key-positions = <10 19>;
 			bindings = <&mo KEYB>;
 		};
 	};
@@ -92,15 +92,15 @@ combo_outer_bottom_pinkies {
 		// |  Q  |  W  |  E  |  R  |  T  | |  Y  |  U  |  I  |  O  |  P  |
 		// |  A  |  S  |  D  |  F  |  G  | |  H  |  I  |  K  |  L  Ä  Ö  |
 		// |  Z  |  X  |  C  |  V  |  B  | |  N  |  M  |  ,  |  .  |  -  |
-		//  -----------------| ENT | SPC | | TAB | BSPC|-----------------
-		//                   | CTL |     | | SYM |     |
-		//                   |   ESC_NAV | |    META   |
+		//  -----------------| ENT | SPC | | ESC | BSPC|-----------------
+		//                   |     | NAV | | SYM |     |
+		//                   |  LCTL_ESC | |    META   |
 		default_layer {
 			bindings = <
 				&kp Q &kp W &kp E &kp R &kp T &kp Y &kp U &kp I &kp O &kp P
 				&kp A  &kp S &kp D &kp F &kp G &kp H &kp J &kp K &kp L &kp ODIA
 				LSFT_Z &kp X &kp C &kp V &kp B &kp N &kp M &kp COMMA &kp DOT RSFT_MINS
-				&mt LCTL RET  &kp SPC &lt SYMB TAB &kp BSPC  
+				&kp RET &lt NAVG SPC &lt SYMB ESC &kp BSPC  
 				>;
 		};
 		//  -------------------------------------------------------------
