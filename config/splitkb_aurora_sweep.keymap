@@ -80,6 +80,11 @@
 			key-positions = <32 33>;
 			bindings = <&mo LGUI>;
 		};
+		combo_keyb_layer {
+			timeout-ms = <200>;
+			key-positions = <20 29>;
+			bindings = <&mo KEYB>;
+		};
 	};
 
 	keymap {
@@ -125,7 +130,7 @@
 			bindings = <
 				&kp TAB XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp BSPC
 				&sk LSFT &sk LGUI &sk LALT &sk LCTL XXXXX &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
-				XXXXX XXXXXX XXXXXX XXXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp UDIA
+				XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp UDIA
 				XXXXX XXXXX &mo KEYB XXXXX 
 				>;
 		};
