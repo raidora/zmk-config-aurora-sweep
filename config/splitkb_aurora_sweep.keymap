@@ -62,7 +62,7 @@
 		combo_left_thumb {
 			timeout-ms = <200>;
 			key-positions = <30 31>;
-			bindings = <&mo LCTL ESC>;
+			bindings = <&mt LCTL ESC>;
 		};
 		combo_right_top {
 			timeout-ms = <200>;
