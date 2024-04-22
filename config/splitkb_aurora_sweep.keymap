@@ -49,11 +49,6 @@
 			key-positions = <18 19>;
 			bindings = <&kp ADIA>;
 		};
-		combo_left_top {
-			timeout-ms = <200>;
-			key-positions = <1 2 3>;
-			bindings = <&kp TAB>;
-		};
 		combo_left_middle {
 			timeout-ms = <200>;
 			key-positions = <11 12 13>;
