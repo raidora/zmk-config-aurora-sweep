@@ -115,7 +115,7 @@ combo_outer_middle_pinkies {
 				EE_PERC EE_BKTK EE_LBRC EE_LABK EE_SLSH   EE_BSLS EE_RABK EE_RBRC EE_AMPR EE_PLUS 
 				EE_PIPE EE_DQUO EE_ASTR EE_LPRN EE_LCBR   EE_RCBR EE_RPRN EE_EQLS EE_QUOT EE_DOLR
 				EE_CARN EE_CIRC EE_TLDE EE_EXCL EE_ATSI   EE_HSTG EE_QSTN EE_SCLN EE_COLN EE_USCR
-				XXXXX XXXXX XXXXX XXXXX
+				XXXXX &trans XXXXX XXXXX
 				>;
 		};
 		//  -------------------------------------------------------------
