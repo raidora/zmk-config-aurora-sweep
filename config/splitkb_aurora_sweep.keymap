@@ -120,16 +120,16 @@ combo_outer_middle_pinkies {
 		};
 		//  -------------------------------------------------------------
 		// | TAB |     |     |     |     | |     |     |     |     | BSPC|
-		// | LSFT| LGUI| LALT| LCTL|     | | LEFT| DOWN|  UP |RIGHT|  Õ  |
-		// |     |     |     |     |     | |     |     |     |     |  Ü  |
+		// |     | LGUI| LALT| LCTL|     | | LEFT| DOWN|  UP |RIGHT|  Õ  |
+		// | LSFT|     |     |     |     | |     |     |     |     |  Ü  |
 		//  -----------------|     |     | |     |     |-----------------
 		//                   |     |     | |     |     |
 		//                   |           | |           |
 		nav_layer {
 			bindings = <
 				&kp TAB XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp BSPC
-				&sk LSFT &sk LGUI &sk LALT &sk LCTL XXXXX &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
-				XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp UDIA
+				XXXXX &sk LGUI &sk LALT &sk LCTL XXXXX &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
+				&kp LSFT XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp UDIA
 				XXXXX XXXXX XXXXX XXXXX 
 				>;
 		};
