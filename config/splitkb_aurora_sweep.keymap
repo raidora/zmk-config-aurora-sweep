@@ -32,8 +32,7 @@
 
 &lt {
 	flavor = "hold-preferred";
-	tapping-term-ms = <0>;
-	quick-tap-ms = <200>;
+	tapping-term-ms = <200>;
 	retro-tap;
 };
 
