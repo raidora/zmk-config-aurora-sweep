@@ -124,7 +124,7 @@ combo_outer_middle_pinkies {
 		nav_layer {
 			bindings = <
 				&kp TAB XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp BSPC
-				XXXXX &sk LGUI &sk LALT &sk LCTL XXXXX &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
+				&kp TAB &sk LGUI &sk LALT &sk LCTL XXXXX &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
 				&kp LSFT XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp UDIA
 				XXXXX XXXXX XXXXX XXXXX 
 				>;
