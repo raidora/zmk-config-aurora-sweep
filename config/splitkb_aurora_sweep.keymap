@@ -125,7 +125,7 @@ combo_outer_middle_pinkies {
 			bindings = <
 				&kp TAB XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp BSPC
 				&kp TAB &sk LGUI &sk LALT &sk LCTL XXXXX &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
-				&kp LSFT XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX XXXXX &kp UDIA
+				&kp LSFT &kp LGUI &kp LALT &kp LCTL XXXXX XXXXX XXXXX XXXXX XXXXX &kp UDIA
 				XXXXX XXXXX XXXXX XXXXX 
 				>;
 		};
