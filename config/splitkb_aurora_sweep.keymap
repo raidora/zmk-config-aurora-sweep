@@ -4,133 +4,136 @@
  * SPDX-License-Identifier: MIT
  */
 
+/*
+ * BLENDER-ONLY KEYMAP
+ * Left hand drives, right hand mouses and hops over to the right half
+ * to type numbers (R Z 90 Enter). Letters stay where Blender expects them;
+ * layers hang off hold-taps:
+ *   hold Z = VIEW   hold A = MIRROR   hold Tab(T) = MODE   hold D = TIME
+ * Ctrl/Shift/Alt are plain modifiers so mouse clicks register instantly.
+ *
+ * Blender prefs: Input > Emulate Numpad OFF. Keep NumLock ON.
+ */
+
 #include <dt-bindings/zmk/keys.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 
-#include "est_definitions.h"
-
-#define LSFT_Z        &mt LSFT Z 
-#define RSFT_MINS     &mt RSFT SLASH 
-#define LCTL_A        &mt LCTL A
-#define RCTL_ODIA     &mt RCTL ODIA
-
-#define DEFA 0
-#define SYMB 1 
-#define NAVG 2
-#define NUMS 3
-#define KEYB 4
-
-&mt {
-	flavor = "hold-preferred";
-	tapping-term-ms = <150>;
-	quick-tap-ms = <200>;
-};
-
-&lt {
-	flavor = "hold-preferred";
-	tapping-term-ms = <150>;
-	quick-tap-ms = <200>;
-};
-
-&sk {
-	release-after-ms = <2000>;
-	lazy;
-	ignore-modifiers;
-};
+#define BASE 0
+#define VIEW 1
+#define MIRR 2
+#define MODE 3
+#define TIME 4
+#define KEYB 5
 
 / {
 	behaviors {
-			lh_pht: left_positional_hold_tap {
+			// Balanced so fast rolls like "A then G" stay taps
+			blt: blender_layer_tap {
 					compatible = "zmk,behavior-hold-tap";
-					flavor = "tap-unless-interrupted";
+					flavor = "balanced";
 					tapping-term-ms = <200>;
-					quick-tap-ms = <200>;
+					quick-tap-ms = <175>;
 					#binding-cells = <2>;
-					bindings = <&kp>, <&kp>;
-					hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29>;
+					bindings = <&mo>, <&kp>;
 			};
-			rh_pht: right_positional_hold_tap {
-					compatible = "zmk,behavior-hold-tap";
-					flavor = "tap-unless-interrupted";
-					tapping-term-ms = <200>;
-					quick-tap-ms = <200>;
-					#binding-cells = <2>;
-					bindings = <&kp>, <&kp>;
-					hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24>;
-			};
-	};
-
-	combos { 
-		compatible = "zmk,combos";
-		combo_adia {
-			timeout-ms = <50>;
-			key-positions = <18 19>;
-			bindings = <&kp ADIA>;
-		};
-		combo_esc {
-			timeout-ms = <100>;
-			key-positions = <11 12 13>;
-			bindings = <&kp ESC>;
-		};
-		combo_tab {
-			timeout-ms = <100>;
-			key-positions = <1 2 3>;
-			bindings = <&kp TAB>;
-		};
-		combo_backspace {
-			timeout-ms = <100>;
-			key-positions = <6 7 8>;
-			bindings = <&kp BSPC>;
-		};
-		combo_enter {
-			timeout-ms = <100>;
-			key-positions = <16 17 18>;
-			bindings = <&kp RET>;
-		};
 	};
 
 	keymap {
 		compatible = "zmk,keymap";
 
-		default_layer {
+		/*
+		 * BASE
+		 *  Alt    W   E   R   Tab|MODE      Y  7  8  9  Bksp
+		 *  A|MIRR S   D|TIME  F   G         H  4  5  6  -
+		 *  Z|VIEW X   C   V   B             N  1  2  3  .
+		 *             Ctrl  Shift          Enter|KEYB  0
+		 * Right half = numeric entry; digits double as 1/2/3 select modes.
+		 */
+		base_layer {
 			bindings = <
-				&kp Q  &kp W &kp E &kp R        &kp T           &kp Y        &kp U &kp I     &kp O   &kp P
-				&kp A  &kp S &kp D &kp F        &kp G           &kp H        &kp J &kp K     &kp L   &kp ODIA
-				LSFT_Z &kp X &kp C &kp V        &kp B           &kp N        &kp M &kp COMMA &kp DOT RSFT_MINS
-								           &mt LCTL RET &lt NAVG SPC    &lt SYMB ESC &mt LSFT BSPC  
+				&kp LALT    &kp W &kp E        &kp R     &blt MODE TAB   &kp Y &kp N7 &kp N8 &kp N9 &kp BSPC
+				&blt MIRR A &kp S &blt TIME D  &kp F     &kp G          &kp H &kp N4 &kp N5 &kp N6 &kp KP_MINUS
+				&blt VIEW Z &kp X &kp C        &kp V     &kp B          &kp N &kp N1 &kp N2 &kp N3 &kp DOT
+				                               &kp LCTRL &kp LSHFT      &lt KEYB RET &kp N0
 				>;
 		};
-		sym_layer {
+
+		/*
+		 * VIEW (hold Z): cube net around D = front
+		 *  .  persp   TOP      local    frame all
+		 *  .  LEFT    FRONT    RIGHT    BACK
+		 *  #  unhide  BOTTOM   frame sel  x-ray
+		 *             camera   (Shift)
+		 * Press Shift before Z, then a view = align view to selection.
+		 */
+		view_layer {
 			bindings = <
-				EE_PERC EE_BKTK EE_LBRC EE_LABK EE_SLSH   EE_BSLS EE_RABK EE_RBRC EE_AMPR &trans
-				EE_PIPE EE_DQUO EE_ASTR EE_LPRN EE_LCBR   EE_RCBR EE_RPRN EE_EQLS EE_QUOT EE_DOLR
-				EE_CARN EE_CIRC EE_TLDE EE_EXCL EE_ATSI   EE_HSTG EE_QSTN EE_SCLN EE_COLN EE_USCR
-				                        &trans  &trans    &trans  &trans
+				&trans &kp KP_N5     &kp KP_N7     &kp KP_SLASH &kp HOME       &trans &trans &trans &trans &trans
+				&trans &kp LC(KP_N3) &kp KP_N1     &kp KP_N3    &kp LC(KP_N1)  &trans &trans &trans &trans &trans
+				&trans &kp LA(H)     &kp LC(KP_N7) &kp KP_DOT   &kp LA(Z)      &trans &trans &trans &trans &trans
+				                                   &kp KP_N0    &trans         &trans &trans
 				>;
 		};
-		nav_layer {
+
+		/*
+		 * MIRROR (hold A): right-hand letters mirrored, same finger.
+		 *  .  O   I   U   Y
+		 *  #  L   K   J   H
+		 *  .  P   ,   M   N      (P on X: the pinky is busy holding A)
+		 */
+		mirror_layer {
 			bindings = <
-				&kp ESC  &trans   &trans   &trans    &trans   &trans   &trans   &trans &trans    &kp BSPC
-				&kp TAB  &trans   &trans   &mo NUMS  &trans   &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp OTIL
-				&sk LSFT &sk LGUI &sk LALT &sk LCTL  &trans   &trans   &trans   &trans &trans    &kp UDIA
-				                  &trans   &trans    &mo KEYB &trans
+				&trans &kp O &kp I     &kp U &kp Y    &trans &trans &trans &trans &trans
+				&trans &kp L &kp K     &kp J &kp H    &trans &trans &trans &trans &trans
+				&trans &kp P &kp COMMA &kp M &kp N    &trans &trans &trans &trans &trans
+				                       &trans &trans  &trans &trans
 				>;
 		};
-		num_layer {
+
+		/*
+		 * MODE (hold Tab): select modes + utilities
+		 *  1    2    3       .  #
+		 *  Esc  F3   F9
+		 *  Max  Del  .
+		 *        Bksp  Enter
+		 * Max = Ctrl+Space (maximize area)
+		 */
+		mode_layer {
 			bindings = <
-				&trans &trans &trans           &trans &trans   &trans &kp N7 &kp N8 &kp N9 &trans
-				&trans &trans &kp LS(LC(LGUI)) &trans &trans   &trans &kp N4 &kp N5 &kp N6 &trans
-				&trans &trans &trans           &trans &trans   &trans &kp N1 &kp N2 &kp N3 &trans
-				                               &trans &trans   &trans &kp N0
+				&kp N1          &kp N2  &kp N3 &trans   &trans    &trans &trans &trans &trans &trans
+				&kp ESC         &kp F3  &kp F9 &trans   &trans    &trans &trans &trans &trans &trans
+				&kp LC(SPACE)   &kp DEL &trans &trans   &trans    &trans &trans &trans &trans &trans
+				                               &kp BSPC &kp RET   &trans &trans
 				>;
 		};
+
+		/*
+		 * TIME (hold D): timeline under the index finger
+		 *  .  Insert key  #  ◀key    key▶
+		 *  .  Play           ◀frame  frame▶
+		 *  .  Delete key     |◀start end▶|
+		 *              (Ctrl) (Shift)
+		 * Left column goes back, right column goes forward.
+		 */
+		time_layer {
+			bindings = <
+				&trans &kp I     &trans &kp DOWN      &kp UP          &trans &trans &trans &trans &trans
+				&trans &kp SPACE &trans &kp LEFT      &kp RIGHT       &trans &trans &trans &trans &trans
+				&trans &kp LA(I) &trans &kp LS(LEFT)  &kp LS(RIGHT)   &trans &trans &trans &trans &trans
+				                        &trans        &trans          &trans &trans
+				>;
+		};
+
+		/*
+		 * KEYB (hold right inner thumb): Bluetooth
+		 */
 		keyb_layer {
 			bindings = <
-				&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
+				&trans &trans &trans &trans &trans   &trans     &trans       &trans       &trans       &trans
 				&trans &trans &trans &trans &trans   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3
-				&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-				                     &trans &trans   &trans &trans
+				&trans &trans &trans &trans &trans   &trans     &trans       &trans       &trans       &trans
+				                     &trans &trans   &trans     &trans
 				>;
 		};
 	};
