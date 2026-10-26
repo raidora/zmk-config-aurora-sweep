@@ -28,12 +28,16 @@
 
 / {
 	behaviors {
-			// Balanced so fast rolls like "A then G" stay taps
+			// Layer turns on the instant the key goes down; any key pressed while
+			// held uses it. Held alone and released = the letter (retro-tap).
+			// Pressed right after another key (fast typing) = plain letter.
 			blt: blender_layer_tap {
 					compatible = "zmk,behavior-hold-tap";
-					flavor = "balanced";
+					flavor = "hold-preferred";
 					tapping-term-ms = <200>;
-					quick-tap-ms = <175>;
+					require-prior-idle-ms = <100>;
+					hold-while-undecided;
+					retro-tap;
 					#binding-cells = <2>;
 					bindings = <&mo>, <&kp>;
 			};
