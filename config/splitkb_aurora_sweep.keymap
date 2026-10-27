@@ -68,7 +68,7 @@
 		 *  .  persp   TOP      local    frame all
 		 *  .  LEFT    FRONT    RIGHT    BACK
 		 *  #  unhide  BOTTOM   frame sel  x-ray
-		 *             camera   (Shift)
+		 *             camera   camera to view
 		 * Press Shift before Z, then a view = align view to selection.
 		 */
 		view_layer {
@@ -76,7 +76,7 @@
 				&trans &kp KP_N5     &kp KP_N7     &kp KP_SLASH &kp HOME       &trans &trans &trans &trans &trans
 				&trans &kp LC(KP_N3) &kp KP_N1     &kp KP_N3    &kp LC(KP_N1)  &trans &trans &trans &trans &trans
 				&trans &kp LA(H)     &kp LC(KP_N7) &kp KP_DOT   &kp LA(Z)      &trans &trans &trans &trans &trans
-				                                   &kp KP_N0    &trans         &trans &trans
+				                                   &kp KP_N0    &kp LC(LA(KP_N0)) &trans &trans
 				>;
 		};
 
